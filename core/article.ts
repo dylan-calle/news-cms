@@ -1,4 +1,4 @@
-export type ArticleFormat = "text" | "image" | "mixed";
+export type ArticleType = "only-text" | "only-images" | "images-and-text";
 
 export interface NewsArticle {
   id: string;
@@ -9,9 +9,9 @@ export interface NewsArticle {
   author: string;
   date: string;
   category: string;
-  imageUrl?: string[];
+  imageUrl?: string;
   readTime: string;
-  format: ArticleFormat;
+  type: ArticleType;
 }
 export interface CreateNewsArticle {
   slug: string;
@@ -21,7 +21,7 @@ export interface CreateNewsArticle {
   author: string;
   date: string;
   category: string;
-  imageUrl?: string[];
+  imageUrl?: string;
   readTime: string;
-  format: ArticleFormat;
+  type: ArticleType;
 }
