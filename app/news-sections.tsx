@@ -8,9 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 function FeaturedArticle({ article }: { article: NewsArticle }) {
-  const format = article.format ?? "mixed";
+  const format = article.type ?? "images-and-text";
 
-  if (format === "text") {
+  if (format === "only-text") {
     return (
       <Card className="overflow-hidden border-0 shadow-lg bg-slate-50 dark:bg-slate-900 p-8">
         <div className="flex items-center gap-2 mb-4">
@@ -33,7 +33,7 @@ function FeaturedArticle({ article }: { article: NewsArticle }) {
     );
   }
 
-  if (format === "image") {
+  if (format === "only-images") {
     return (
       <Card className="overflow-hidden border-0 shadow-lg bg-slate-50 dark:bg-slate-900 relative min-h-100">
         {article.imageUrl && (
@@ -102,9 +102,9 @@ function FeaturedArticle({ article }: { article: NewsArticle }) {
 }
 
 function ArticleCard({ article }: { article: NewsArticle }) {
-  const format = article.format ?? "mixed";
+  const format = article.type ?? "images-and-text";
 
-  if (format === "text") {
+  if (format === "only-text") {
     return (
       <Card className="flex flex-col overflow-hidden hover:shadow-md transition-shadow">
         <CardHeader className="grow">
@@ -131,7 +131,7 @@ function ArticleCard({ article }: { article: NewsArticle }) {
     );
   }
 
-  if (format === "image") {
+  if (format === "only-images") {
     return (
       <Card className="flex flex-col overflow-hidden hover:shadow-md transition-shadow relative min-h-70">
         {article.imageUrl && (
@@ -163,7 +163,6 @@ function ArticleCard({ article }: { article: NewsArticle }) {
     );
   }
 
-  // mixed (default)
   return (
     <Card className="flex flex-col overflow-hidden hover:shadow-md transition-shadow">
       {article.imageUrl && (
@@ -204,12 +203,12 @@ export default async function NewsSections() {
   return (
     <>
       <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">Noticia Destacada</h2>
+        <h2 className="text-2xl font-bold mb-6">Última noticia</h2>
         <FeaturedArticle article={featuredArticle} />
       </section>
       <section>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Últimas Noticias</h2>
+          <h2 className="text-2xl font-bold">Otras Noticias</h2>
           <Button variant="ghost">Ver Todas las Noticias &rarr;</Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

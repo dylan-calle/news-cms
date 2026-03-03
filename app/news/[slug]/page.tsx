@@ -16,7 +16,7 @@ export default async function NewsArticlePage({ params }: { params: { slug: stri
     notFound();
   }
 
-  const format = article.format ?? "mixed";
+  const articleType = article.type ?? "images-and-text";
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-4xl">
@@ -30,7 +30,7 @@ export default async function NewsArticlePage({ params }: { params: { slug: stri
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Badge variant="secondary">{article.category}</Badge>
           <Badge variant="outline">
-            {format === "text" ? "Solo Texto" : format === "image" ? "Galería" : "Artículo"}
+            {articleType === "only-text" ? "Solo Texto" : articleType === "only-images" ? "Galería" : "Artículo"}
           </Badge>
           <span>•</span>
           <span>{article.date}</span>
@@ -50,20 +50,17 @@ export default async function NewsArticlePage({ params }: { params: { slug: stri
         </div>
       </div>
 
-      {/* Content based on format */}
-      {format === "text" && (
+      {articleType === "only-text" && (
         <div className="prose prose-lg dark:prose-invert max-w-none prose-img:rounded-xl prose-img:mx-auto">
           <ReactMarkdown>{article.content}</ReactMarkdown>
         </div>
       )}
 
-      {format === "image" && (
+      {articleType === "only-images" && (
         <div className="space-y-6">
-          {article.imageUrl && (
-            <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-100">
-              <img src={article.imageUrl} alt={article.title} className="object-cover w-full h-full" />
-            </div>
-          )}
+          <div className="prose prose-lg dark:prose-invert max-w-none prose-img:rounded-xl prose-img:mx-auto">
+            <ReactMarkdown>{article.content}</ReactMarkdown>
+          </div>
           <Card className="p-6 bg-slate-50 dark:bg-slate-900 text-center">
             <p className="text-muted-foreground italic">
               Esta noticia es de tipo galería fotográfica. Las imágenes cuentan la historia.
@@ -72,13 +69,8 @@ export default async function NewsArticlePage({ params }: { params: { slug: stri
         </div>
       )}
 
-      {format === "mixed" && (
+      {articleType === "images-and-text" && (
         <>
-          {article.imageUrl && (
-            <div className="relative aspect-video w-full rounded-xl overflow-hidden mb-12 bg-slate-100">
-              <img src={article.imageUrl} alt={article.title} className="object-cover w-full h-full" />
-            </div>
-          )}
           <div className="prose prose-lg dark:prose-invert max-w-none prose-img:rounded-xl prose-img:mx-auto">
             <ReactMarkdown>{article.content}</ReactMarkdown>
           </div>
@@ -88,7 +80,7 @@ export default async function NewsArticlePage({ params }: { params: { slug: stri
       <Separator className="my-12" />
 
       <footer className="flex justify-between items-center pb-12">
-        <p className="text-sm text-muted-foreground">© 2026 News CMS Built with Shadcn</p>
+        <p className="text-sm text-muted-foreground">© 2026 Sansi News</p>
         <div className="flex gap-4">
           <Button variant="outline" size="sm">
             Compartir
