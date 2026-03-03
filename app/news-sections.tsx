@@ -1,22 +1,29 @@
 "use server";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { getAllArticles } from "@/lib/articles";
 import { NewsArticle } from "@/core/article";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { formatSpanishDate } from "@/utils/dates";
 
 function FeaturedArticle({ article }: { article: NewsArticle }) {
   const format = article.type ?? "images-and-text";
-
   if (format === "only-text") {
     return (
-      <Card className="overflow-hidden border-0 shadow-lg bg-slate-50 dark:bg-slate-900 p-8">
+      <Card
+        className="overflow-hidden border-0 shadow-lg bg-slate-50 dark:bg-slate-900 p-8 cursor-pointer"
+        onClick={() => {
+          console.log("clikcing");
+          redirect(`/news/${article.slug}`);
+        }}
+      >
         <div className="flex items-center gap-2 mb-4">
           <Badge>{article.category}</Badge>
           <Badge variant="outline">Solo Texto</Badge>
-          <span className="text-sm text-muted-foreground">{article.date}</span>
+          <span className="text-sm text-muted-foreground">{formatSpanishDate(article.date)}</span>
         </div>
         <h3 className="text-3xl font-bold mb-4 hover:underline">
           <Link href={`/news/${article.slug}`}>{article.title}</Link>
@@ -52,7 +59,7 @@ function FeaturedArticle({ article }: { article: NewsArticle }) {
             <Badge variant="outline" className="text-white border-white/30">
               Galería
             </Badge>
-            <span className="text-sm text-white/80">{article.date}</span>
+            <span className="text-sm text-white/80">{formatSpanishDate(article.date)}</span>
           </div>
           <h3 className="text-3xl font-bold mb-3 hover:underline">
             <Link href={`/news/${article.slug}`}>{article.title}</Link>
@@ -84,7 +91,7 @@ function FeaturedArticle({ article }: { article: NewsArticle }) {
       <div className="md:w-1/2 flex flex-col justify-center p-8">
         <div className="flex items-center gap-2 mb-4">
           <Badge>{article.category}</Badge>
-          <span className="text-sm text-muted-foreground">{article.date}</span>
+          <span className="text-sm text-muted-foreground">{formatSpanishDate(article.date)}</span>
         </div>
         <h3 className="text-3xl font-bold mb-4 hover:underline">
           <Link href={`/news/${article.slug}`}>{article.title}</Link>
@@ -106,14 +113,14 @@ function ArticleCard({ article }: { article: NewsArticle }) {
 
   if (format === "only-text") {
     return (
-      <Card className="flex flex-col overflow-hidden hover:shadow-md transition-shadow">
+      <Card className="flex flex-col overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
         <CardHeader className="grow">
           <div className="flex items-center gap-2 mb-2 text-xs">
             <Badge variant="secondary">{article.category}</Badge>
             <Badge variant="outline" className="text-xs">
               Solo Texto
             </Badge>
-            <span className="text-muted-foreground">{article.date}</span>
+            <span className="text-muted-foreground">{formatSpanishDate(article.date)}</span>
           </div>
           <h3 className="text-xl font-bold hover:text-blue-600 transition-colors">
             <Link href={`/news/${article.slug}`}>{article.title}</Link>
@@ -125,7 +132,7 @@ function ArticleCard({ article }: { article: NewsArticle }) {
         </CardContent>
         <CardFooter className="flex justify-between items-center text-xs text-muted-foreground border-t bg-slate-50/50 dark:bg-transparent pt-4">
           <span>{article.author}</span>
-          <span>{article.readTime}</span>
+          <span>{article.readTime} mins de lectura</span>
         </CardFooter>
       </Card>
     );
@@ -179,7 +186,7 @@ function ArticleCard({ article }: { article: NewsArticle }) {
       <CardHeader className="grow">
         <div className="flex items-center gap-2 mb-2 text-xs">
           <Badge variant="secondary">{article.category}</Badge>
-          <span className="text-muted-foreground">{article.date}</span>
+          <span className="text-muted-foreground">{formatSpanishDate(article.date)}</span>
         </div>
         <h3 className="text-xl font-bold hover:text-blue-600 transition-colors">
           <Link href={`/news/${article.slug}`}>{article.title}</Link>
