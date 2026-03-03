@@ -1,0 +1,12 @@
+{
+  "id": "1",
+  "slug": "future-of-ai-in-journalism",
+  "title": "The Future of AI in Modern Journalisma",
+  "excerpt": "How artificial intelligence is reshaping the newsroom, from automated reporting to deep data analytics.",
+  "content": "Artificial intelligence has shifted from a sci-fi concept to an everyday newsroom tool. Major publications are now using AI to draft financial reports, sports summaries, and even break down massive datasets for investigative pieces.\n\n![AI working in data centers](https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200)\n\nHowever, this introduces profound questions about journalistic ethics, bias, and the essence of the human reporter.\n* **Ethical concerns:** Can AI verify sources?\n* **Bias:** Does it inherit prejudices from its training data?\n\nWhile algorithms can process millions of documents in seconds, they lack the intuition to interview a hesitant whistleblower or observe the nuanced mood of a protest. Ultimately, the future points toward a hybrid approach.",
+  "author": "Elena Rodriguez",
+  "date": "2026-03-01",
+  "category": "Technology",
+  "imageUrl": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200",
+  "readTime": "5 min read"
+}
