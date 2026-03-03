@@ -2,9 +2,9 @@ import { getAllArticles } from "@/lib/articles";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatSpanishDate } from "@/utils/dates";
-import { PlusCircle, Pencil, Trash2 } from "lucide-react";
+import { PlusCircle, Pencil, Trash2, LogOut } from "lucide-react";
 import Link from "next/link";
-import { deleteArticleAction } from "./actions";
+import { deleteArticleAction, logoutAction } from "./actions";
 
 export default async function AdminDashboard() {
   const articles = await getAllArticles();
@@ -16,12 +16,20 @@ export default async function AdminDashboard() {
           <h1 className="text-3xl font-bold tracking-tight">Panel de Administración</h1>
           <p className="text-muted-foreground mt-1">Gestiona los artículos y noticias del portal</p>
         </div>
-        <Link href="/admin/create">
-          <Button className="h-8 px-6">
-            <PlusCircle className="mr-2 h-5 w-5" />
-            Nueva Noticia
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <Link href="/admin/create" className="flex-1 sm:flex-none">
+            <Button className="h-9 px-4 w-full sm:w-auto">
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Nueva Noticia
+            </Button>
+          </Link>
+          <form action={logoutAction} className="flex-1 sm:flex-none">
+            <Button variant="outline" className="h-9 px-4 w-full sm:w-auto text-muted-foreground">
+              <LogOut className="mr-2 h-4 w-4" />
+              Cerrar Sesión
+            </Button>
+          </form>
+        </div>
       </div>
 
       <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border overflow-hidden">

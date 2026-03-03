@@ -10,3 +10,11 @@ export async function deleteArticleAction(formData: FormData) {
     revalidatePath("/");
   }
 }
+
+import { logout } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
+export async function logoutAction() {
+  await logout();
+  redirect("/admin/login");
+}
